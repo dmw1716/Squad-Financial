@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Squad Financial — AI-Native Strategic Finance From Idea to Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #7C3AED;
+      --purple-light: #A855F7;
+      --cyan: #06B6D4;
+      --green: #10B981;
+      --amber: #F59E0B;
+      --dark: #050510;
+      --dark-2: #0D0D1F;
+      --dark-3: #12122A;
+      --gray: #8892A4;
+      --light: #F0F2FF;
+      --white: #FFFFFF;
+      --grad: linear-gradient(135deg, #7C3AED 0%, #06B6D4 100%);
+      --grad-text: linear-gradient(135deg, #A855F7 0%, #06B6D4 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 60px;
+      background: rgba(5, 5, 16, 0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--grad);
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      overflow: hidden;
+    }
+
+    /* Gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--purple); top: -100px; left: -150px; }
+    .orb-2 { width: 500px; height: 500px; background: var(--cyan); bottom: -100px; right: -100px; }
+    .orb-3 { width: 300px; height: 300px; background: var(--green); top: 40%; left: 50%; transform: translate(-50%,-50%); opacity: 0.15; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124, 58, 237, 0.15);
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--purple-light);
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-badge span { font-size: 16px; }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(44px, 7vw, 80px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+    }
+
+    .grad-text {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(17px, 2.5vw, 21px);
+      color: var(--gray);
+      line-height: 1.65;
+      max-width: 680px;
+      margin: 0 auto 44px;
+    }
+
+    .hero-sub strong { color: var(--white); }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--grad);
+      color: white;
+      border: none;
+      padding: 16px 36px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 40px rgba(124, 58, 237, 0.4);
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 60px rgba(124, 58, 237, 0.55); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 16px 36px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      margin-top: 72px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { color: var(--gray); font-size: 13px; margin-top: 4px; font-weight: 500; }
+
+    /* ─── SECTION COMMON ─── */
+    section { position: relative; z-index: 1; }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      color: var(--gray);
+      font-size: 18px;
+      line-height: 1.65;
+      max-width: 600px;
+    }
+
+
+    /* ─── JOURNEY BAR ─── */
+    .journey-bar {
+      display: flex;
+      align-items: flex-start;
+      margin: 48px 0 60px;
+      gap: 0;
+    }
+
+    .journey-stage {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .journey-dot {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--grad);
+      margin: 0 auto 12px;
+      position: relative;
+      z-index: 1;
+      opacity: 0.4;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .journey-dot.active,
+    .journey-stage:hover .journey-dot { opacity: 1; transform: scale(1.3); }
+
+    .journey-dot.smb {
+      background: linear-gradient(135deg, #F59E0B, #10B981);
+      opacity: 0.6;
+    }
+    .journey-stage:hover .journey-dot.smb { opacity: 1; }
+
+    .journey-line {
+      flex: 0 0 24px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(124,58,237,0.4), rgba(6,182,212,0.4));
+      margin-top: 8px;
+      align-self: flex-start;
+    }
+
+    .journey-stage-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .journey-stage-sub {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+      padding: 0 4px;
+    }
+
+    @media (max-width: 900px) {
+      .journey-bar { flex-direction: column; gap: 20px; }
+      .journey-line { width: 1px; height: 20px; flex: 0 0 20px; margin: 0 auto; background: linear-gradient(180deg, rgba(124,58,237,0.4), rgba(6,182,212,0.4)); }
+      .journey-stage { text-align: left; display: flex; align-items: flex-start; gap: 16px; }
+      .journey-dot { flex-shrink: 0; margin: 3px 0 0; }
+    }
+
+    /* ─── WHY SQUAD ─── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .why-card {
+      background: var(--dark-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 36px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .why-card:hover { border-color: rgba(124, 58, 237, 0.4); transform: translateY(-4px); }
+
+    .why-card.wide { grid-column: span 2; }
+
+    .why-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: rgba(124, 58, 237, 0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .why-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .why-card p { color: var(--gray); line-height: 1.65; font-size: 15px; }
+
+    /* ─── SERVICES ─── */
+    .services-section { background: var(--dark-2); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .service-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .service-card:hover { border-color: rgba(6, 182, 212, 0.4); transform: translateY(-4px); }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      font-size: 36px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .service-card p { color: var(--gray); line-height: 1.65; font-size: 15px; margin-bottom: 24px; }
+
+    .service-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      color: var(--purple-light);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .tag.cyan { background: rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.25); color: var(--cyan); }
+    .tag.green { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.25); color: var(--green); }
+    .tag.amber { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.25); color: var(--amber); }
+
+    /* Partner badge on service card */
+    .partner-badge {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--amber);
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── PARTNER SECTION ─── */
+    .partner-section {
+      background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(6,182,212,0.08) 100%);
+      border-top: 1px solid rgba(124,58,237,0.2);
+      border-bottom: 1px solid rgba(6,182,212,0.2);
+    }
+
+    .partner-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .partner-text h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .partner-text p { color: var(--gray); line-height: 1.7; font-size: 16px; margin-bottom: 20px; }
+
+    .partner-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .partner-link:hover { gap: 10px; }
+
+    .partner-card {
+      background: var(--dark-2);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 20px;
+      padding: 44px;
+      position: relative;
+    }
+
+    .partner-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.3), transparent 60%);
+      z-index: -1;
+    }
+
+    .partner-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .partner-logo-icon {
+      width: 56px; height: 56px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+
+    .partner-logo-text h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .partner-logo-text span {
+      font-size: 13px;
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .partner-features { list-style: none; }
+    .partner-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .partner-features li:last-child { border-bottom: none; }
+    .partner-features li::before {
+      content: '✓';
+      color: var(--amber);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 60px; right: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124,58,237,0.4) 20%, rgba(6,182,212,0.4) 80%, transparent);
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step p { color: var(--gray); font-size: 14px; line-height: 1.6; }
+
+    /* ─── PRICING ─── */
+    .pricing-section { background: var(--dark-2); }
+
+    .pricing-note {
+      color: var(--gray);
+      font-size: 15px;
+      margin-top: 12px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px;
+      transition: transform 0.3s;
+    }
+    .pricing-card:hover { transform: translateY(-6px); }
+
+    .pricing-card.featured {
+      background: linear-gradient(160deg, #130D2E 0%, #0A1A2E 100%);
+      border: 1px solid rgba(124, 58, 237, 0.5);
+      box-shadow: 0 0 60px rgba(124, 58, 237, 0.2);
+      position: relative;
+    }
+
+    .pricing-popular {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--grad);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 18px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .pricing-tier {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .pricing-card.featured .pricing-tier { color: var(--purple-light); }
+
+    .pricing-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-price sup {
+      font-size: 24px;
+      vertical-align: top;
+      margin-top: 12px;
+      display: inline-block;
+    }
+
+    .pricing-period { color: var(--gray); font-size: 14px; margin-bottom: 8px; }
+
+    .pricing-desc {
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 16px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin: 16px 0;
+    }
+
+    .pricing-features { list-style: none; margin-bottom: 32px; }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray);
+      padding: 7px 0;
+    }
+
+    .pricing-features li .check {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(16,185,129,0.15);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--green);
+      margin-top: 1px;
+    }
+
+    .pricing-features li.highlighted { color: var(--white); font-weight: 500; }
+
+    .pricing-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      border: none;
+    }
+
+    .pricing-btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+    }
+    .pricing-btn-outline:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+
+    .pricing-btn-primary {
+      background: var(--grad);
+      color: white;
+      box-shadow: 0 0 30px rgba(124, 58, 237, 0.35);
+    }
+    .pricing-btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 6px 40px rgba(124,58,237,0.5); }
+
+    /* ─── COST COMPARISON ─── */
+    .cost-compare {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin-top: 56px;
+      margin-bottom: 48px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .cost-col {
+      padding: 36px 40px;
+    }
+
+    .cost-col-bad {
+      background: rgba(255,255,255,0.03);
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cost-col-good {
+      background: linear-gradient(160deg, rgba(124,58,237,0.12) 0%, rgba(6,182,212,0.08) 100%);
+    }
+
+    .cost-col-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .cost-col-bad .cost-col-label { color: rgba(255,255,255,0.5); }
+    .cost-col-good .cost-col-label { color: var(--white); }
+
+    .cost-rows { display: flex; flex-direction: column; gap: 0; }
+
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 14px;
+      gap: 16px;
+    }
+
+    .cost-row span:first-child { color: var(--gray); }
+    .cost-bad { color: #F87171; font-weight: 600; text-align: right; }
+    .cost-good { color: var(--green); font-weight: 600; text-align: right; }
+
+    .cost-total-bad,
+    .cost-total-good {
+      border-bottom: none;
+      margin-top: 8px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .cost-total-bad span:first-child,
+    .cost-total-good span:first-child { color: var(--white); }
+    .cost-total-bad span:last-child { color: #F87171; font-size: 16px; }
+    .cost-total-good span:last-child { color: var(--green); font-size: 16px; }
+
+    .cost-vs {
+      background: var(--dark-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 2px;
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      writing-mode: vertical-rl;
+    }
+
+    @media (max-width: 900px) {
+      .cost-compare {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .cost-vs {
+        writing-mode: horizontal-tb;
+        padding: 16px;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .cost-col-bad { border-right: none; }
+    }
+
+    .pricing-addon {
+      margin-top: 48px;
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 16px;
+      padding: 28px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .pricing-addon h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .pricing-addon p { color: var(--gray); font-size: 14px; }
+
+    .pricing-addon a {
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.35);
+      color: var(--amber);
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .pricing-addon a:hover { background: rgba(245,158,11,0.25); }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .testimonial {
+      background: var(--dark-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 32px;
+      transition: border-color 0.3s;
+    }
+    .testimonial:hover { border-color: rgba(124,58,237,0.3); }
+
+    .testimonial-stars { color: var(--amber); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-text { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px;
+    }
+    .testimonial-name { font-weight: 700; font-size: 14px; }
+    .testimonial-role { color: var(--gray); font-size: 12px; }
+
+    /* ─── TESTIMONIALS DUO ─── */
+    .testimonials-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 56px;
+    }
+
+    @media (max-width: 900px) {
+      .testimonials-duo { grid-template-columns: 1fr; }
+    }
+
+    /* ─── FEATURED TESTIMONIAL ─── */
+    .featured-testimonial {
+      background: linear-gradient(160deg, rgba(124,58,237,0.1) 0%, rgba(6,182,212,0.06) 100%);
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 24px;
+      padding: 56px 48px;
+      position: relative;
+    }
+
+    .featured-quote-mark {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 120px;
+      line-height: 0.6;
+      color: rgba(124,58,237,0.2);
+      position: absolute;
+      top: 40px;
+      left: 48px;
+      pointer-events: none;
+    }
+
+    .featured-quote-text {
+      font-size: 18px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.88);
+      font-style: italic;
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .featured-testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
+    }
+
+    @media (max-width: 700px) {
+      .featured-testimonial { padding: 36px 28px; }
+      .featured-quote-mark { font-size: 80px; top: 24px; left: 24px; }
+      .featured-quote-text { font-size: 16px; }
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-inner {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section .orb-1 { opacity: 0.25; }
+    .cta-section .orb-2 { opacity: 0.2; }
+
+    .cta-inner h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .cta-inner p {
+      color: var(--gray);
+      font-size: 18px;
+      max-width: 520px;
+      margin: 0 auto 44px;
+      line-height: 1.65;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark-2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 60px 24px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p {
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .footer-col a, .footer-col span {
+      display: block;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .footer-col a { transition: color 0.2s; cursor: pointer; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-col span { cursor: default; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 13px; }
+
+    .footer-disclaimer {
+      color: rgba(255,255,255,0.2);
+      font-size: 11px;
+      line-height: 1.6;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+
+      .why-grid,
+      .services-grid,
+      .partner-inner,
+      .pricing-grid,
+      .testimonials-grid,
+      .footer-top { grid-template-columns: 1fr; gap: 24px; }
+
+      .why-card.wide { grid-column: span 1; }
+
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .steps::before { display: none; }
+
+      .pricing-card.featured { margin-top: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .steps { grid-template-columns: 1fr; }
+      .hero-stats { gap: 28px; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .floating { animation: float 6s ease-in-out infinite; }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.4); }
+      50% { box-shadow: 0 0 70px rgba(124, 58, 237, 0.7); }
+    }
+
+    .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+    /* scroll reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Squad Financial</div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#partner">Our Partner</a></li>
+    </ul>
+    <a href="#pricing" class="nav-cta">Get Started →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span>✦</span> From Idea to Growth — We're With You Every Step</div>
+      <h1>Your <span class="grad-text">Finance Squad</span>,<br/>Built to Scale</h1>
+      <p class="hero-sub">
+        Whether you're writing your first business plan or crossing $10M in EBITDA — fractional CFO leadership, FP&amp;A, M&amp;A advisory, and full-stack tax &amp; assurance* in one place. No fragmented vendors. No gaps.
+      </p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary pulse-glow">See Packages →</a>
+        <a href="#services" class="btn-secondary">Explore Services</a>
+      </div>
+      <p style="margin-top: 24px; font-size: 12px; color: rgba(136,146,164,0.7);">* Tax and assurance services provided via partnerships with peer-reviewed CPA firms.</p>
+    </div>
+  </section>
+
+
+  <!-- WHY SQUAD -->
+  <section id="why">
+    <div class="section-inner">
+      <div class="reveal">
+        <span class="section-label">Who We Serve</span>
+        <h2 class="section-title">We meet you where you are.<br/><span class="grad-text">And go where you're going.</span></h2>
+        <p class="section-sub">From the idea stage all the way through growth — and for established SMBs ready to level up their finance function. One squad, built to grow with you — from first idea to established business.</p>
+
+        <!-- Journey stages -->
+        <div class="journey-bar">
+          <div class="journey-stage">
+            <div class="journey-dot active"></div>
+            <div class="journey-stage-label">Idea / Pre-Seed</div>
+            <div class="journey-stage-sub">First model, financial structure, entity setup</div>
+          </div>
+          <div class="journey-line"></div>
+          <div class="journey-stage">
+            <div class="journey-dot"></div>
+            <div class="journey-stage-label">Seed</div>
+            <div class="journey-stage-sub">Investor readiness, cash management, early FP&amp;A</div>
+          </div>
+          <div class="journey-line"></div>
+          <div class="journey-stage">
+            <div class="journey-dot"></div>
+            <div class="journey-stage-label">Early Stage</div>
+            <div class="journey-stage-sub">Series A/B, board reporting, hiring the finance function</div>
+          </div>
+          <div class="journey-line"></div>
+          <div class="journey-stage">
+            <div class="journey-dot"></div>
+            <div class="journey-stage-label">Growth</div>
+            <div class="journey-stage-sub">M&amp;A, multi-entity, audit readiness, exit planning</div>
+          </div>
+          <div class="journey-line"></div>
+          <div class="journey-stage">
+            <div class="journey-dot smb"></div>
+            <div class="journey-stage-label">Established Businesses</div>
+            <div class="journey-stage-sub">Businesses crossing $10M in EBITDA, ready for institutional-quality finance</div>
+          </div>
+        </div>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon">⚡</div>
+          <h3>AI-Native from Day One</h3>
+          <p>We don't bolt AI onto legacy workflows. Our entire delivery stack — modeling, reporting, compliance checks — is purpose-built with AI to move 10x faster and catch what humans miss.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🏗️</div>
+          <h3>One Team, Zero Gaps</h3>
+          <p>CFO strategy, FP&amp;A, tax, and audit handled by one coordinated squad. No more chasing four different vendors or discovering that your tax team doesn't talk to your CFO.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">📈</div>
+          <h3>Built for Fundraising</h3>
+          <p>We've helped founders close seed through Series C. From your first 3-statement model to investor data rooms and board-ready reporting — we speak the language VCs expect.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🛡️</div>
+          <h3>Audit-Ready Infrastructure</h3>
+          <p>Our partnership with Goldfine &amp; Co CPA PC means your books are always clean, compliant, and ready for diligence — whether that's a Series A or a Big Four audit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section" id="services">
+    <div class="section-inner">
+      <div class="reveal">
+        <span class="section-label">Services</span>
+        <h2 class="section-title">Strategic finance,<br/>end to end</h2>
+        <p class="section-sub">From CFO-level strategy to M&amp;A, capital raising, and compliance — every layer of your startup's financial stack, covered.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <span class="service-icon">📊</span>
+          <h3>Fractional CFO &amp; Strategic Finance</h3>
+          <p>A senior strategic finance leader on your team — without the $300K salary. We embed in your business, own the financial narrative, and report directly to your board and investors.</p>
+          <div class="service-tags">
+            <span class="tag">Board Reporting</span>
+            <span class="tag">Cash Management</span>
+            <span class="tag cyan">KPI Design</span>
+            <span class="tag cyan">Investor Relations</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal">
+          <span class="service-icon">🔮</span>
+          <h3>FP&amp;A &amp; Financial Modeling</h3>
+          <p>AI-powered models that actually get used. Dynamic 3-statement models, rolling forecasts, scenario planning, and budget-to-actual variance analysis delivered on your cadence.</p>
+          <div class="service-tags">
+            <span class="tag">3-Statement Models</span>
+            <span class="tag cyan">Scenario Planning</span>
+            <span class="tag green">Rolling Forecasts</span>
+            <span class="tag green">Unit Economics</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="position:relative;">
+          <span class="service-icon">🧾</span>
+          <h3>Tax Strategy &amp; Compliance</h3>
+          <p>NY-based CPA expertise through our exclusive partnership with Goldfine &amp; Co CPA PC. Federal and state returns, R&amp;D credits, 83(b) elections, and proactive year-round tax strategy.</p>
+          <div class="service-tags">
+            <span class="tag amber">Federal &amp; State Returns</span>
+            <span class="tag amber">R&amp;D Tax Credits</span>
+            <span class="tag amber">Equity &amp; Options</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="position:relative;">
+          <span class="service-icon">🔍</span>
+          <h3>Audit Support</h3>
+          <p>From internal controls to Big Four readiness — our CPA partner ensures your books survive any level of scrutiny. Proactive diligence prep means no scrambling when the auditors arrive.</p>
+          <div class="service-tags">
+            <span class="tag amber">Audit Readiness</span>
+            <span class="tag amber">Internal Controls</span>
+            <span class="tag amber">Diligence Prep</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="grid-column: span 2;">
+          <span class="service-icon">🚀</span>
+          <h3>Fundraising &amp; Investor Readiness</h3>
+          <p>We've been in diligence rooms. We know exactly what investors stress-test — and we make sure you pass. From first pitch to term sheet, we prepare your financial narrative, data room, and cap table so you walk in bulletproof.</p>
+          <div class="service-tags">
+            <span class="tag">Financial Narrative</span>
+            <span class="tag cyan">Data Room Build</span>
+            <span class="tag green">Cap Table Mgmt</span>
+            <span class="tag green">409A Valuations</span>
+            <span class="tag">Pitch Deck Financials</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="grid-column: span 2; position: relative;">
+          <div class="partner-badge" style="background: rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.3); color: var(--purple-light);">⚖️ GT Securities</div>
+          <span class="service-icon">🏦</span>
+          <h3>M&amp;A Advisory &amp; Capital Raising</h3>
+          <p>Whether you're raising your next round, pursuing a strategic acquisition, or preparing for an exit — our team provides end-to-end advisory. We structure deals, identify the right counterparties, and guide you through every stage of the transaction.</p>
+          <div class="service-tags">
+            <span class="tag">Buy-Side M&amp;A</span>
+            <span class="tag">Sell-Side M&amp;A</span>
+            <span class="tag cyan">Capital Raises</span>
+            <span class="tag cyan">Deal Structuring</span>
+            <span class="tag green">Exit Planning</span>
+            <span class="tag green">Fairness Opinions</span>
+          </div>
+          <p style="margin-top: 20px; font-size: 12px; color: var(--gray); line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px;">
+            Securities-related services are offered through registered representatives of <strong style="color: rgba(255,255,255,0.5);">GT Securities</strong>. GT Securities is a registered broker-dealer. Squad Financial and GT Securities are separate and unaffiliated entities.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center; margin-bottom: 0;">
+        <span class="section-label">Process</span>
+        <h2 class="section-title">Up and running in days,<br/><span class="grad-text">not months</span></h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <h3>Free Discovery Call</h3>
+          <p>We learn your business, current finance stack, and goals. No obligations — just clarity.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">2</div>
+          <h3>Tailored Proposal</h3>
+          <p>Within 24 hours, you receive a custom scope and package recommendation matched to your stage.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">3</div>
+          <h3>48-Hour Onboarding</h3>
+          <p>We plug into your tools — QuickBooks, Stripe, Ramp — and get operational within two business days.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">4</div>
+          <h3>Ongoing Partnership</h3>
+          <p>Weekly syncs, real-time Slack access, monthly closes, and proactive strategy — all on autopilot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER SECTION -->
+  <section class="partner-section" id="partner">
+    <div class="section-inner">
+      <div class="partner-inner">
+        <div class="partner-text reveal">
+          <span class="section-label">Our CPA Partners</span>
+          <h2>Tax &amp; audit expertise,<br/><span class="grad-text">built right in</span></h2>
+          <p>Most fractional CFO firms leave tax and audit to you. We don't. Through our partnerships with <strong>Goldfine &amp; Co CPA PC</strong> and <strong>Singer &amp; Falk CPAs</strong>, Squad Financial clients get seamless, coordinated coverage across every financial function.</p>
+          <p>One relationship. One source of truth. No finger-pointing between your CFO and your accountants.</p>
+        </div>
+        <div class="partner-card reveal floating">
+          <div class="partner-logo-area">
+            <div class="partner-logo-icon">⚖️</div>
+            <div class="partner-logo-text">
+              <h4>Peer-Reviewed CPA Partners</h4>
+              <span>Independent Licensed CPA Firms</span>
+            </div>
+          </div>
+          <ul class="partner-features">
+            <li>Federal &amp; multi-state tax compliance for startups</li>
+            <li>R&amp;D tax credit identification and documentation</li>
+            <li>Equity compensation &amp; 83(b) elections</li>
+            <li>Audit readiness and internal control review</li>
+            <li>Year-round proactive tax strategy</li>
+            <li>Coordinated directly with your Squad CFO</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;">
+        <span class="section-label">Pricing</span>
+        <h2 class="section-title">Transparent pricing.<br/><span class="grad-text">No surprises.</span></h2>
+        <p class="pricing-note">All plans billed monthly. Annual contracts available with discounted rates.</p>
+      </div>
+
+      <!-- Cost Comparison -->
+      <div class="cost-compare reveal">
+        <div class="cost-col cost-col-bad">
+          <div class="cost-col-label">❌ Full-Time CFO Hire</div>
+          <div class="cost-rows">
+            <div class="cost-row">
+              <span>Base salary</span>
+              <span class="cost-bad">$220K – $320K/yr</span>
+            </div>
+            <div class="cost-row">
+              <span>Benefits &amp; payroll taxes</span>
+              <span class="cost-bad">$40K – $60K/yr</span>
+            </div>
+            <div class="cost-row">
+              <span>Equity dilution</span>
+              <span class="cost-bad">0.5% – 1.5%</span>
+            </div>
+            <div class="cost-row">
+              <span>Recruiting fee</span>
+              <span class="cost-bad">$20K – $40K</span>
+            </div>
+            <div class="cost-row">
+              <span>Ramp time</span>
+              <span class="cost-bad">3 – 6 months</span>
+            </div>
+            <div class="cost-row cost-total-bad">
+              <span>Total Year 1 (est.)</span>
+              <span>$300K – $420K+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cost-vs">VS</div>
+
+        <div class="cost-col cost-col-good">
+          <div class="cost-col-label">✦ Squad Financial</div>
+          <div class="cost-rows">
+            <div class="cost-row">
+              <span>Fractional CFO</span>
+              <span class="cost-good">Starting at $42K/yr</span>
+            </div>
+            <div class="cost-row">
+              <span>Benefits &amp; payroll taxes</span>
+              <span class="cost-good">$0</span>
+            </div>
+            <div class="cost-row">
+              <span>Equity dilution</span>
+              <span class="cost-good">Stage dependent</span>
+            </div>
+            <div class="cost-row">
+              <span>Recruiting fee</span>
+              <span class="cost-good">$0</span>
+            </div>
+            <div class="cost-row">
+              <span>Ramp time</span>
+              <span class="cost-good">48 hours</span>
+            </div>
+            <div class="cost-row cost-total-good">
+              <span>Total Year 1</span>
+              <span>Starting at $42K/yr</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- Seed -->
+        <div class="pricing-card reveal">
+          <div class="pricing-tier">Seed</div>
+          <div style="font-size: 13px; color: var(--gray); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">Starting at</div>
+          <div class="pricing-price"><sup>$</sup>3,500<span style="font-size:20px; color: var(--gray); letter-spacing:0;">/mo</span></div>
+          <p class="pricing-period">For pre-seed &amp; seed stage startups</p>
+          <p class="pricing-desc">Essential financial infrastructure to get your house in order and investor-ready.</p>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span>Fractional CFO (up to 10 hrs/mo)</li>
+            <li><span class="check">✓</span>Monthly financial close</li>
+            <li><span class="check">✓</span>Basic 3-statement model</li>
+            <li><span class="check">✓</span>Cash flow monitoring &amp; alerts</li>
+            <li><span class="check">✓</span>Slack access (business hours)</li>
+            <li><span class="check">✓</span>Quarterly board prep</li>
+          </ul>
+          <a href="#" class="pricing-btn pricing-btn-outline">Get Started</a>
+        </div>
+
+        <!-- Growth - FEATURED -->
+        <div class="pricing-card featured reveal" style="position:relative;">
+          <div class="pricing-popular">Most Popular</div>
+          <div class="pricing-tier">Growth</div>
+          <div style="font-size: 13px; color: var(--purple-light); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">Starting at</div>
+          <div class="pricing-price"><sup>$</sup>7,500<span style="font-size:20px; color: var(--gray); letter-spacing:0;">/mo</span></div>
+          <p class="pricing-period">For Series A &amp; high-growth startups</p>
+          <p class="pricing-desc">Full CFO partnership with deep FP&amp;A, fundraising support, and CPA coordination.</p>
+          <ul class="pricing-features">
+            <li class="highlighted"><span class="check">✓</span>Fractional CFO (up to 30 hrs/mo)</li>
+            <li class="highlighted"><span class="check">✓</span>Dynamic FP&amp;A &amp; rolling forecasts</li>
+            <li class="highlighted"><span class="check">✓</span>Fundraising &amp; investor readiness</li>
+            <li class="highlighted"><span class="check">✓</span>Cap table management</li>
+            <li class="highlighted"><span class="check">✓</span>Monthly board reporting package</li>
+            <li class="highlighted"><span class="check">✓</span>CPA partner tax coordination</li>
+            <li class="highlighted"><span class="check">✓</span>Priority Slack access (24/7)</li>
+            <li><span class="check">✓</span>Bi-weekly strategic syncs</li>
+          </ul>
+          <a href="#" class="pricing-btn pricing-btn-primary">Get Started →</a>
+        </div>
+
+        <!-- Scale -->
+        <div class="pricing-card reveal">
+          <div class="pricing-tier">Scale</div>
+          <div style="font-size: 13px; color: var(--gray); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">Starting at</div>
+          <div class="pricing-price"><sup>$</sup>14,000<span style="font-size:20px; color: var(--gray); letter-spacing:0;">/mo</span></div>
+          <p class="pricing-period">For Series B+ &amp; pre-IPO companies</p>
+          <p class="pricing-desc">Embedded finance leadership with full CPA coverage and enterprise-grade reporting.</p>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span>Dedicated CFO (up to 60 hrs/mo)</li>
+            <li><span class="check">✓</span>Full FP&amp;A function buildout</li>
+            <li><span class="check">✓</span>Multi-entity consolidations</li>
+            <li><span class="check">✓</span>Audit support &amp; compliance</li>
+            <li><span class="check">✓</span>Full CPA partner suite (Goldfine &amp; Co CPA PC &amp; Singer &amp; Falk)</li>
+            <li><span class="check">✓</span>M&amp;A financial diligence support</li>
+            <li><span class="check">✓</span>Dedicated account team</li>
+            <li><span class="check">✓</span>Weekly executive syncs</li>
+          </ul>
+          <a href="#" class="pricing-btn pricing-btn-outline">Get Started</a>
+        </div>
+
+      </div>
+
+      <!-- Add-on -->
+      <div class="pricing-addon reveal">
+        <div>
+          <h4>🧾 Add Tax &amp; Audit — Powered by Goldfine &amp; Co</h4>
+          <p>Available as a stand-alone add-on to any plan. Annual tax filing, R&amp;D credits, audit readiness, and ongoing compliance handled by our NY CPA partner — fully coordinated with your Squad CFO.</p>
+        </div>
+        <a href="#partner">Learn More →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;">
+        <span class="section-label">What Our Partners Say</span>
+        <h2 class="section-title">Trusted by those who<br/><span class="grad-text">know finance best</span></h2>
+      </div>
+
+      <div class="testimonials-duo">
+
+        <div class="featured-testimonial reveal">
+          <div class="featured-quote-mark">"</div>
+          <p class="featured-quote-text">The clients we refer to Squad Financial tell us the same thing, consistently — they finally have a real financial partner. Not just someone managing the books, but a team that understands where they are and where they're going. What impresses us most isn't the sophistication of the advice, though that is genuinely institutional-level. It's the timing. Squad has an ability to surface the right insight at exactly the right moment — whether a client is deciding how to structure their first raise, navigating a difficult quarter, or preparing for an exit. That kind of judgment is what separates great financial advisors from the rest. And they're delivering it at a fraction of what our clients would otherwise pay.</p>
+          <div class="featured-testimonial-author">
+            <div class="testimonial-avatar" style="width:52px;height:52px;font-size:18px;">G</div>
+            <div>
+              <div class="testimonial-name" style="font-size:16px;">Goldfine &amp; Co CPA PC</div>
+              <div class="testimonial-role" style="font-size:13px;">New York, NY · Licensed CPA Firm · Assurance Partner</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured-testimonial reveal">
+          <div class="featured-quote-mark">"</div>
+          <p class="featured-quote-text">Working with Squad Financial on mutual clients is what a true strategic partnership looks like. When legal and finance are aligned from the start — speaking the same language, moving toward the same outcomes — clients feel the difference immediately. We're not advising in silos. We're executing together, and that coordination changes the quality of the outcome entirely. Our clients get better results, faster, because the people around the table are actually working as one team.</p>
+          <div class="featured-testimonial-author">
+            <div class="testimonial-avatar" style="width:52px;height:52px;font-size:18px;">C</div>
+            <div>
+              <div class="testimonial-name" style="font-size:16px;">[XXX]</div>
+              <div class="testimonial-role" style="font-size:13px;">Fractional Chief Counsel · Strategic Partner</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured-testimonial reveal" style="grid-column: span 2;">
+          <div class="featured-quote-mark">"</div>
+          <p class="featured-quote-text">Cross-jurisdictional transactions demand precision at every stage — from valuation to structure to close. What sets Squad Financial apart is that they arrive already thinking like deal counsel. The financial analysis is rigorous, the documentation is clean, and when complexity arises — as it always does in multi-jurisdiction work — they move with exactly the right combination of speed and judgment. Valuations were defensible, structuring decisions were well-reasoned, and the path to closing was seamless. When you're working across borders with a lot on the line, you need people who don't have to be managed. Squad doesn't.</p>
+          <div class="featured-testimonial-author">
+            <div class="testimonial-avatar" style="width:52px;height:52px;font-size:18px;background:linear-gradient(135deg,#7C3AED,#06B6D4);">C</div>
+            <div>
+              <div class="testimonial-name" style="font-size:16px;">Campbell's Law Firm</div>
+              <div class="testimonial-role" style="font-size:13px;">Cross-Jurisdictional M&amp;A &amp; Transactions · Legal Partner</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured-testimonial reveal">
+          <div class="featured-quote-mark">"</div>
+          <p class="featured-quote-text">They just get it. Digital assets, Web3, crypto — these are spaces where most financial advisors are still catching up. Squad Financial isn't. They understand the nuances of the asset class, the regulatory landscape, and what it means to build a finance function in this space. Working with them felt less like briefing a CFO and more like thinking out loud with a team that already knows where you're going.</p>
+          <div class="featured-testimonial-author">
+            <div class="testimonial-avatar" style="width:52px;height:52px;font-size:18px;background:linear-gradient(135deg,#10B981,#06B6D4);">L</div>
+            <div>
+              <div class="testimonial-name" style="font-size:16px;">Lucia Gallardo</div>
+              <div class="testimonial-role" style="font-size:13px;">EmergeTech Labs UK · Digital Assets, Web3 &amp; Crypto</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="section-inner cta-inner">
+      <span class="section-label">Ready?</span>
+      <h2>Your finance squad<br/><span class="grad-text">is one call away</span></h2>
+      <p>Schedule a strategy call. We'll map out exactly what you need — direct, no fluff.</p>
+      <a href="mailto:hello@squadfinancial.com" class="btn-primary" style="display:inline-block;">Book a Strategy Call →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>Squad Financial</h3>
+          <p>AI-native strategic finance from pre-seed to growth — and for established businesses ready to level up. Fractional CFO, FP&amp;A, M&amp;A advisory, capital raising, and full CPA coverage via Goldfine &amp; Co CPA PC and Singer &amp; Falk CPAs — one squad, zero gaps.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <span>Fractional CFO</span>
+          <span>FP&amp;A &amp; Modeling</span>
+          <span>Fundraising Support</span>
+          <span>M&amp;A Advisory</span>
+          <span>Capital Raising</span>
+          <span>Tax Strategy</span>
+          <span>Assurance Support</span>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#why">About</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#pricing">Pricing</a>
+          <span>Blog</span>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="mailto:hello@squadfinancial.com">hello@squadfinancial.com</a>
+          <a href="#partner">Our CPA Partners ↗</a>
+          <span>LinkedIn</span>
+          <span>Twitter / X</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Squad Financial LLC. All rights reserved.</p>
+        <p>New York, NY</p>
+      </div>
+      <p class="footer-disclaimer">
+        Squad Financial provides fractional CFO and financial advisory services. Tax and assurance services are provided by independent, peer-reviewed CPA firms. Squad Financial is not a CPA firm and does not provide accounting, tax, or assurance services directly. Securities-related services, including M&amp;A advisory and capital raising, are offered through registered representatives of GT Securities, a registered broker-dealer. Squad Financial and GT Securities are separate and unaffiliated entities. All financial decisions should be reviewed with appropriate licensed professionals.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // Stagger children in grids
+    document.querySelectorAll('.why-grid, .services-grid, .pricing-grid, .testimonials-grid, .steps').forEach(grid => {
+      Array.from(grid.children).forEach((child, i) => {
+        child.style.transitionDelay = `${i * 0.1}s`;
+      });
+    });
+  </script>
+</body>
+</html>
